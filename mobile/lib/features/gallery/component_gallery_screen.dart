@@ -30,31 +30,36 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
 
   static const _samples = [
     Child(
-        id: 's1',
-        displayName: 'Areeba Khan',
-        signal: Signal.followUp,
-        hasConsent: true),
+      id: 's1',
+      displayName: 'Areeba Khan',
+      signal: Signal.followUp,
+      hasConsent: true,
+    ),
     Child(
-        id: 's2',
-        displayName: 'Faraz Malik',
-        signal: Signal.watch,
-        hasConsent: true),
+      id: 's2',
+      displayName: 'Faraz Malik',
+      signal: Signal.watch,
+      hasConsent: true,
+    ),
     Child(
-        id: 's3',
-        displayName: 'Hania Qureshi',
-        signal: Signal.allClear,
-        hasConsent: true),
+      id: 's3',
+      displayName: 'Hania Qureshi',
+      signal: Signal.allClear,
+      hasConsent: true,
+    ),
     Child(
-        id: 's4',
-        displayName: 'Noor Fatima',
-        signal: Signal.notYet,
-        hasConsent: true,
-        isNextUp: true),
+      id: 's4',
+      displayName: 'Noor Fatima',
+      signal: Signal.notYet,
+      hasConsent: true,
+      isNextUp: true,
+    ),
     Child(
-        id: 's5',
-        displayName: 'Saad Rehman',
-        signal: Signal.notYet,
-        hasConsent: false),
+      id: 's5',
+      displayName: 'Saad Rehman',
+      signal: Signal.notYet,
+      hasConsent: false,
+    ),
   ];
 
   @override
@@ -63,16 +68,16 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
     final theme = Theme.of(context);
 
     Widget section(String title, Widget child) => Padding(
-          padding: const EdgeInsets.only(bottom: IlmSpace.xl),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: theme.textTheme.titleLarge),
-              const SizedBox(height: IlmSpace.md),
-              child,
-            ],
-          ),
-        );
+      padding: const EdgeInsets.only(bottom: IlmSpace.xl),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title, style: theme.textTheme.titleLarge),
+          const SizedBox(height: IlmSpace.md),
+          child,
+        ],
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -83,8 +88,10 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
             onPressed: widget.onToggleLanguage,
             style: TextButton.styleFrom(
               foregroundColor: IlmColors.white,
-              minimumSize:
-                  const Size(IlmSize.minTouchTarget, IlmSize.minTouchTarget),
+              minimumSize: const Size(
+                IlmSize.minTouchTarget,
+                IlmSize.minTouchTarget,
+              ),
             ),
             child: Text(s.isUrdu ? 'English' : 'اردو'),
           ),
@@ -106,8 +113,9 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                         Expanded(
                           child: Text(
                             s.appName,
-                            style: theme.textTheme.headlineMedium!
-                                .copyWith(color: IlmColors.marigold),
+                            style: theme.textTheme.headlineMedium!.copyWith(
+                              color: IlmColors.marigold,
+                            ),
                           ),
                         ),
                         const ProgressRing(done: 18, total: 32),
@@ -140,9 +148,15 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
               options: [
                 FilterOption(value: _Filter.everyone, label: s.filterEveryone),
                 FilterOption(
-                    value: _Filter.followUp, label: s.signalFollowUp, count: 2),
+                  value: _Filter.followUp,
+                  label: s.signalFollowUp,
+                  count: 2,
+                ),
                 FilterOption(
-                    value: _Filter.notYet, label: s.signalNotYet, count: 14),
+                  value: _Filter.notYet,
+                  label: s.signalNotYet,
+                  count: 14,
+                ),
               ],
             ),
           ),
@@ -201,8 +215,9 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                 child: Center(
                   child: Text(
                     s.useYourFinger,
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(color: IlmColors.inkMuted),
+                    style: theme.textTheme.bodySmall!.copyWith(
+                      color: IlmColors.inkMuted,
+                    ),
                   ),
                 ),
               ),
@@ -215,8 +230,10 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
               children: [
                 const MedallionBadge(signal: Signal.followUp),
                 const SizedBox(height: IlmSpace.md),
-                Text(s.screeningNotDiagnosis,
-                    style: theme.textTheme.bodyMedium),
+                Text(
+                  s.screeningNotDiagnosis,
+                  style: theme.textTheme.bodyMedium,
+                ),
                 const SizedBox(height: IlmSpace.lg),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,

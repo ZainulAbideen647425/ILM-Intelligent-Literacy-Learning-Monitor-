@@ -148,8 +148,9 @@ class _AppStringsDelegate extends LocalizationsDelegate<AppStrings> {
   const _AppStringsDelegate();
 
   @override
-  bool isSupported(Locale locale) => AppStrings.supportedLocales
-      .any((l) => l.languageCode == locale.languageCode);
+  bool isSupported(Locale locale) => AppStrings.supportedLocales.any(
+    (l) => l.languageCode == locale.languageCode,
+  );
 
   @override
   Future<AppStrings> load(Locale locale) async => AppStrings(locale);

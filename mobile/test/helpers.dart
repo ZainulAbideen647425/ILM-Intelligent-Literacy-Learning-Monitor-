@@ -26,10 +26,7 @@ Future<void> pumpIlm(
       theme: AppTheme.light(locale: locale),
       home: Scaffold(
         body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: child,
-          ),
+          child: Padding(padding: const EdgeInsets.all(16), child: child),
         ),
       ),
     ),

@@ -47,7 +47,7 @@ void main() {
       for (final fill in [
         IlmColors.aubergine,
         IlmColors.rose,
-        IlmColors.peacock
+        IlmColors.peacock,
       ]) {
         expect(
           Contrast.ratio(IlmColors.white, fill),

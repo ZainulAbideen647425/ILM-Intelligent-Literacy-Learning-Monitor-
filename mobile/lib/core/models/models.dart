@@ -15,9 +15,9 @@ enum Signal {
   final String wire;
 
   static Signal fromWire(String value) => Signal.values.firstWhere(
-        (s) => s.wire == value,
-        orElse: () => throw FormatException('Unknown signal: $value'),
-      );
+    (s) => s.wire == value,
+    orElse: () => throw FormatException('Unknown signal: $value'),
+  );
 }
 
 /// How often a pattern was seen, shown to teachers as a word, never a number.
@@ -31,9 +31,9 @@ enum Level {
   final String wire;
 
   static Level fromWire(String value) => Level.values.firstWhere(
-        (l) => l.wire == value,
-        orElse: () => throw FormatException('Unknown level: $value'),
-      );
+    (l) => l.wire == value,
+    orElse: () => throw FormatException('Unknown level: $value'),
+  );
 }
 
 class Child {
@@ -46,12 +46,12 @@ class Child {
   });
 
   factory Child.fromJson(Map<String, Object?> json) => Child(
-        id: json['id']! as String,
-        displayName: json['display_name']! as String,
-        signal: Signal.fromWire(json['signal']! as String),
-        hasConsent: json['has_consent']! as bool,
-        isNextUp: (json['is_next_up'] as bool?) ?? false,
-      );
+    id: json['id']! as String,
+    displayName: json['display_name']! as String,
+    signal: Signal.fromWire(json['signal']! as String),
+    hasConsent: json['has_consent']! as bool,
+    isNextUp: (json['is_next_up'] as bool?) ?? false,
+  );
 
   final String id;
   final String displayName;
@@ -83,15 +83,15 @@ class ClassRoom {
   });
 
   factory ClassRoom.fromJson(Map<String, Object?> json) => ClassRoom(
-        id: json['id']! as String,
-        name: json['name']! as String,
-        nameUr: json['name_ur']! as String,
-        savedOfflineCount: (json['saved_offline_count'] as int?) ?? 0,
-        children: (json['children']! as List<Object?>)
-            .cast<Map<String, Object?>>()
-            .map(Child.fromJson)
-            .toList(),
-      );
+    id: json['id']! as String,
+    name: json['name']! as String,
+    nameUr: json['name_ur']! as String,
+    savedOfflineCount: (json['saved_offline_count'] as int?) ?? 0,
+    children: (json['children']! as List<Object?>)
+        .cast<Map<String, Object?>>()
+        .map(Child.fromJson)
+        .toList(),
+  );
 
   final String id;
   final String name;

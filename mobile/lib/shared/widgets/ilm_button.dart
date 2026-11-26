@@ -33,11 +33,11 @@ class IlmButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isPrimary = variant == IlmButtonVariant.primary;
     final textStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
-          color: IlmColors.aubergine,
-          fontVariations: Directionality.of(context) == TextDirection.rtl
-              ? null
-              : AppTheme.headingBold,
-        );
+      color: IlmColors.aubergine,
+      fontVariations: Directionality.of(context) == TextDirection.rtl
+          ? null
+          : AppTheme.headingBold,
+    );
     final style = ButtonStyle(
       minimumSize: const WidgetStatePropertyAll(
         Size(IlmSize.minTouchTarget, IlmSize.buttonHeight),

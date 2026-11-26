@@ -23,10 +23,10 @@ class _IlmAppState extends State<IlmApp> {
   late Locale _locale = widget.initialLocale;
 
   void _toggleLocale() => setState(() {
-        _locale = _locale.languageCode == 'ur'
-            ? const Locale('en')
-            : const Locale('ur');
-      });
+    _locale = _locale.languageCode == 'ur'
+        ? const Locale('en')
+        : const Locale('ur');
+  });
 
   @override
   Widget build(BuildContext context) {

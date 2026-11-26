@@ -34,13 +34,13 @@ abstract final class AppTheme {
     );
 
     TextStyle heading(double size) => TextStyle(
-          fontFamily: headingFamily,
-          fontSize: size,
-          fontWeight: FontWeight.w700,
-          fontVariations: isUrdu ? null : headingBold,
-          color: IlmColors.aubergine,
-          height: isUrdu ? 1.8 : 1.2,
-        );
+      fontFamily: headingFamily,
+      fontSize: size,
+      fontWeight: FontWeight.w700,
+      fontVariations: isUrdu ? null : headingBold,
+      color: IlmColors.aubergine,
+      height: isUrdu ? 1.8 : 1.2,
+    );
 
     TextStyle body(double size, {FontWeight weight = FontWeight.w400}) =>
         TextStyle(

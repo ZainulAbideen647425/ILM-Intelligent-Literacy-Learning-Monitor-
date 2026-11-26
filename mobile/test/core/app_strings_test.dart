@@ -38,13 +38,19 @@ void main() {
         AppStrings.values[lang]!.forEach((key, value) {
           final lower = value.toLowerCase();
           for (final word in bannedEverywhere) {
-            expect(lower.contains(word), isFalse,
-                reason: '$lang.$key contains "$word"');
+            expect(
+              lower.contains(word),
+              isFalse,
+              reason: '$lang.$key contains "$word"',
+            );
           }
           if (!AppStrings.disclaimerKeys.contains(key)) {
             for (final word in diagnosisWords) {
-              expect(lower.contains(word), isFalse,
-                  reason: '$lang.$key contains "$word"');
+              expect(
+                lower.contains(word),
+                isFalse,
+                reason: '$lang.$key contains "$word"',
+              );
             }
           }
         });

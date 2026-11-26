@@ -23,24 +23,26 @@ class ChildTile extends StatelessWidget {
     final status = !student.hasConsent
         ? Text(
             s.needsConsent,
-            style: theme.textTheme.bodySmall!
-                .copyWith(color: IlmColors.rose, fontWeight: FontWeight.w700),
+            style: theme.textTheme.bodySmall!.copyWith(
+              color: IlmColors.rose,
+              fontWeight: FontWeight.w700,
+            ),
           )
         : student.isNextUp
-            ? Text(
-                s.nextUp,
-                style: theme.textTheme.bodySmall!.copyWith(
-                  color: IlmColors.inkMuted,
-                  fontWeight: FontWeight.w700,
-                ),
-              )
-            : SignalChip(signal: student.signal, dense: true);
+        ? Text(
+            s.nextUp,
+            style: theme.textTheme.bodySmall!.copyWith(
+              color: IlmColors.inkMuted,
+              fontWeight: FontWeight.w700,
+            ),
+          )
+        : SignalChip(signal: student.signal, dense: true);
 
     final statusLabel = !student.hasConsent
         ? s.needsConsent
         : student.isNextUp
-            ? s.nextUp
-            : student.signal.label(s);
+        ? s.nextUp
+        : student.signal.label(s);
 
     final content = Padding(
       padding: const EdgeInsets.all(IlmSpace.md),
@@ -80,15 +82,16 @@ class ChildTile extends StatelessWidget {
             side: highlighted
                 ? const BorderSide(color: IlmColors.rose, width: 2)
                 : student.isNextUp
-                    ? BorderSide.none
-                    : const BorderSide(color: IlmColors.sand),
+                ? BorderSide.none
+                : const BorderSide(color: IlmColors.sand),
           ),
           clipBehavior: Clip.antiAlias,
           child: InkWell(
             onTap: enabled ? onTap : null,
             child: ConstrainedBox(
-              constraints:
-                  const BoxConstraints(minHeight: IlmSize.minTouchTarget),
+              constraints: const BoxConstraints(
+                minHeight: IlmSize.minTouchTarget,
+              ),
               child: content,
             ),
           ),
@@ -105,12 +108,13 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background =
-        student.signal == Signal.notYet ? IlmColors.sand : student.signal.color;
+    final background = student.signal == Signal.notYet
+        ? IlmColors.sand
+        : student.signal.color;
     final foreground =
         student.signal == Signal.notYet || student.signal == Signal.watch
-            ? IlmColors.aubergine
-            : IlmColors.white;
+        ? IlmColors.aubergine
+        : IlmColors.white;
     return Container(
       width: 40,
       height: 40,

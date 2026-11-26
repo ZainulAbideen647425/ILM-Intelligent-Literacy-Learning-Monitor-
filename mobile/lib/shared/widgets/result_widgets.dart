@@ -56,22 +56,22 @@ class LevelGauge extends StatelessWidget {
   final double size;
 
   Color get _color => switch (level) {
-        Level.many => IlmColors.rose,
-        Level.some => IlmColors.marigold,
-        Level.few => IlmColors.peacock,
-      };
+    Level.many => IlmColors.rose,
+    Level.some => IlmColors.marigold,
+    Level.few => IlmColors.peacock,
+  };
 
   Color get _textColor => switch (level) {
-        Level.many => IlmColors.rose,
-        Level.some => IlmColors.marigoldText,
-        Level.few => IlmColors.peacock,
-      };
+    Level.many => IlmColors.rose,
+    Level.some => IlmColors.marigoldText,
+    Level.few => IlmColors.peacock,
+  };
 
   double get _fraction => switch (level) {
-        Level.many => 0.85,
-        Level.some => 0.55,
-        Level.few => 0.25,
-      };
+    Level.many => 0.85,
+    Level.some => 0.55,
+    Level.few => 0.25,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +95,10 @@ class LevelGauge extends StatelessWidget {
               child: Center(
                 child: Text(
                   word,
-                  style: theme.textTheme.labelMedium!
-                      .copyWith(color: _textColor, fontWeight: FontWeight.w700),
+                  style: theme.textTheme.labelMedium!.copyWith(
+                    color: _textColor,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),

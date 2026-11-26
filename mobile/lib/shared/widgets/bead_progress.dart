@@ -46,8 +46,8 @@ class BeadProgress extends StatelessWidget {
                   color: i < current
                       ? _doneColors[i % _doneColors.length]
                       : i == current
-                          ? IlmColors.white
-                          : IlmColors.sand,
+                      ? IlmColors.white
+                      : IlmColors.sand,
                   border: i == current
                       ? Border.all(color: IlmColors.aubergine, width: 3)
                       : null,

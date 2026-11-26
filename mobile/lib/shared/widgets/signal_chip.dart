@@ -8,26 +8,26 @@ import '../../core/theme/tokens.g.dart';
 extension SignalStyle on Signal {
   /// Fill colour for shapes, borders and avatars.
   Color get color => switch (this) {
-        Signal.followUp => IlmColors.rose,
-        Signal.watch => IlmColors.marigold,
-        Signal.allClear => IlmColors.peacock,
-        Signal.notYet => IlmColors.inkMuted,
-      };
+    Signal.followUp => IlmColors.rose,
+    Signal.watch => IlmColors.marigold,
+    Signal.allClear => IlmColors.peacock,
+    Signal.notYet => IlmColors.inkMuted,
+  };
 
   /// Text colour that meets WCAG AA on cream and white.
   Color get textColor => switch (this) {
-        Signal.followUp => IlmColors.rose,
-        Signal.watch => IlmColors.marigoldText,
-        Signal.allClear => IlmColors.peacock,
-        Signal.notYet => IlmColors.inkMuted,
-      };
+    Signal.followUp => IlmColors.rose,
+    Signal.watch => IlmColors.marigoldText,
+    Signal.allClear => IlmColors.peacock,
+    Signal.notYet => IlmColors.inkMuted,
+  };
 
   String label(AppStrings s) => switch (this) {
-        Signal.followUp => s.signalFollowUp,
-        Signal.watch => s.signalWatch,
-        Signal.allClear => s.signalAllClear,
-        Signal.notYet => s.signalNotYet,
-      };
+    Signal.followUp => s.signalFollowUp,
+    Signal.watch => s.signalWatch,
+    Signal.allClear => s.signalAllClear,
+    Signal.notYet => s.signalNotYet,
+  };
 }
 
 /// The shape that carries a signal's meaning without colour:
@@ -41,11 +41,11 @@ class SignalShape extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: CustomPaint(
-          size: Size.square(size),
-          painter: _SignalShapePainter(signal),
-        ),
-      );
+    child: CustomPaint(
+      size: Size.square(size),
+      painter: _SignalShapePainter(signal),
+    ),
+  );
 }
 
 class _SignalShapePainter extends CustomPainter {
@@ -68,7 +68,9 @@ class _SignalShapePainter extends CustomPainter {
       case Signal.followUp:
         canvas.drawRRect(
           RRect.fromRectAndRadius(
-              rect, Radius.circular(size.shortestSide * 0.2)),
+            rect,
+            Radius.circular(size.shortestSide * 0.2),
+          ),
           fill,
         );
       case Signal.watch:
@@ -102,10 +104,11 @@ class SignalChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final s = AppStrings.of(context);
-    final style = (dense
-            ? Theme.of(context).textTheme.bodySmall
-            : Theme.of(context).textTheme.labelMedium)!
-        .copyWith(color: signal.textColor, fontWeight: FontWeight.w700);
+    final style =
+        (dense
+                ? Theme.of(context).textTheme.bodySmall
+                : Theme.of(context).textTheme.labelMedium)!
+            .copyWith(color: signal.textColor, fontWeight: FontWeight.w700);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

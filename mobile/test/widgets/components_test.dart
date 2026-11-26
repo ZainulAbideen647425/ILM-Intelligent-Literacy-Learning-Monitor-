@@ -23,8 +23,9 @@ void main() {
       Signal.notYet: 'Not yet',
     };
     for (final entry in expected.entries) {
-      testWidgets('F1-TC-12 ${entry.key.name} shows shape + word',
-          (tester) async {
+      testWidgets('F1-TC-12 ${entry.key.name} shows shape + word', (
+        tester,
+      ) async {
         await pumpIlm(tester, SignalChip(signal: entry.key));
         expect(find.text(entry.value), findsOneWidget);
         expect(find.byType(SignalShape), findsOneWidget);
@@ -62,14 +63,16 @@ void main() {
       hasConsent: false,
     );
 
-    testWidgets('F1-TC-14 shows initials, name and signal; tap works',
-        (tester) async {
+    testWidgets('F1-TC-14 shows initials, name and signal; tap works', (
+      tester,
+    ) async {
       var taps = 0;
       await pumpIlm(
         tester,
         SizedBox(
-            width: 180,
-            child: ChildTile(student: followUp, onTap: () => taps++)),
+          width: 180,
+          child: ChildTile(student: followUp, onTap: () => taps++),
+        ),
       );
       expect(find.text('AK'), findsOneWidget);
       expect(find.text('Areeba Khan'), findsOneWidget);
@@ -89,33 +92,42 @@ void main() {
 
     testWidgets('F1-TC-15 next-up child shows "Next up"', (tester) async {
       await pumpIlm(
-          tester,
-          SizedBox(
-              width: 180, child: ChildTile(student: nextUp, onTap: () {})));
+        tester,
+        SizedBox(
+          width: 180,
+          child: ChildTile(student: nextUp, onTap: () {}),
+        ),
+      );
       expect(find.text('Next up'), findsOneWidget);
     });
 
-    testWidgets('F1-TC-16 child without consent cannot be started',
-        (tester) async {
+    testWidgets('F1-TC-16 child without consent cannot be started', (
+      tester,
+    ) async {
       var taps = 0;
       await pumpIlm(
         tester,
         SizedBox(
-            width: 180,
-            child: ChildTile(student: noConsent, onTap: () => taps++)),
+          width: 180,
+          child: ChildTile(student: noConsent, onTap: () => taps++),
+        ),
       );
       expect(find.text('Needs consent'), findsOneWidget);
       await tester.tap(find.byType(ChildTile));
       expect(taps, 0);
     });
 
-    testWidgets('F1-TC-17 meets target-size, label and contrast guidelines',
-        (tester) async {
+    testWidgets('F1-TC-17 meets target-size, label and contrast guidelines', (
+      tester,
+    ) async {
       final handle = tester.ensureSemantics();
       await pumpIlm(
-          tester,
-          SizedBox(
-              width: 180, child: ChildTile(student: followUp, onTap: () {})));
+        tester,
+        SizedBox(
+          width: 180,
+          child: ChildTile(student: followUp, onTap: () {}),
+        ),
+      );
       await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
       await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
       await expectLater(tester, meetsGuideline(textContrastGuideline));
@@ -124,8 +136,9 @@ void main() {
   });
 
   group('FilterBar', () {
-    testWidgets('F1-TC-18 selecting a filter reports its value',
-        (tester) async {
+    testWidgets('F1-TC-18 selecting a filter reports its value', (
+      tester,
+    ) async {
       String? picked;
       await pumpIlm(
         tester,
@@ -164,35 +177,41 @@ void main() {
 
   group('IlmButton', () {
     testWidgets(
-        'F1-TC-19 primary and secondary buttons are tappable and >= 48 dp',
-        (tester) async {
-      final handle = tester.ensureSemantics();
-      var taps = 0;
-      await pumpIlm(
-        tester,
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IlmButton(
-                label: 'Done', icon: Icons.check, onPressed: () => taps++),
-            IlmButton(
-              label: 'Again',
-              variant: IlmButtonVariant.secondary,
-              onPressed: () => taps++,
-            ),
-          ],
-        ),
-      );
-      await tester.tap(find.text('Done'));
-      await tester.tap(find.text('Again'));
-      expect(taps, 2);
-      expect(tester.getSize(find.byType(ElevatedButton).first).height,
-          greaterThanOrEqualTo(48));
-      await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
-      await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
-      await expectLater(tester, meetsGuideline(textContrastGuideline));
-      handle.dispose();
-    });
+      'F1-TC-19 primary and secondary buttons are tappable and >= 48 dp',
+      (tester) async {
+        final handle = tester.ensureSemantics();
+        var taps = 0;
+        await pumpIlm(
+          tester,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IlmButton(
+                label: 'Done',
+                icon: Icons.check,
+                onPressed: () => taps++,
+              ),
+              IlmButton(
+                label: 'Again',
+                variant: IlmButtonVariant.secondary,
+                onPressed: () => taps++,
+              ),
+            ],
+          ),
+        );
+        await tester.tap(find.text('Done'));
+        await tester.tap(find.text('Again'));
+        expect(taps, 2);
+        expect(
+          tester.getSize(find.byType(ElevatedButton).first).height,
+          greaterThanOrEqualTo(48),
+        );
+        await expectLater(tester, meetsGuideline(androidTapTargetGuideline));
+        await expectLater(tester, meetsGuideline(labeledTapTargetGuideline));
+        await expectLater(tester, meetsGuideline(textContrastGuideline));
+        handle.dispose();
+      },
+    );
 
     testWidgets('disabled button does not fire', (tester) async {
       await pumpIlm(tester, const IlmButton(label: 'Done', onPressed: null));
@@ -201,12 +220,15 @@ void main() {
     });
   });
 
-  testWidgets('F1-TC-20 ProgressRing announces progress in words',
-      (tester) async {
+  testWidgets('F1-TC-20 ProgressRing announces progress in words', (
+    tester,
+  ) async {
     await pumpIlm(
       tester,
       const ColoredBox(
-          color: Colors.black, child: ProgressRing(done: 18, total: 32)),
+        color: Colors.black,
+        child: ProgressRing(done: 18, total: 32),
+      ),
     );
     expect(find.text('18'), findsOneWidget);
     expect(find.text('of 32'), findsOneWidget);
@@ -214,8 +236,9 @@ void main() {
   });
 
   group('BeadProgress', () {
-    testWidgets('F1-TC-21 shows beads but no numbers to the child',
-        (tester) async {
+    testWidgets('F1-TC-21 shows beads but no numbers to the child', (
+      tester,
+    ) async {
       await pumpIlm(tester, const BeadProgress(current: 2, total: 6));
       for (var i = 0; i < 6; i++) {
         expect(find.byKey(ValueKey('bead-$i')), findsOneWidget);
@@ -257,9 +280,9 @@ void main() {
           children: [
             MedallionBadge(signal: Signal.watch),
             SizedBox(
-                width: 300,
-                child:
-                    ObservationRow(text: 'Paused often', signal: Signal.watch)),
+              width: 300,
+              child: ObservationRow(text: 'Paused often', signal: Signal.watch),
+            ),
           ],
         ),
       );
@@ -269,22 +292,23 @@ void main() {
   });
 
   testWidgets(
-      'truck-art band and frame are decorative (hidden from screen readers)',
-      (tester) async {
-    await pumpIlm(
-      tester,
-      const SizedBox(
-        width: 300,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TruckArtBand(),
-            TruckArtFrame(child: SizedBox(height: 80, child: Text('canvas'))),
-          ],
+    'truck-art band and frame are decorative (hidden from screen readers)',
+    (tester) async {
+      await pumpIlm(
+        tester,
+        const SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TruckArtBand(),
+              TruckArtFrame(child: SizedBox(height: 80, child: Text('canvas'))),
+            ],
+          ),
         ),
-      ),
-    );
-    expect(find.text('canvas'), findsOneWidget);
-    expect(tester.takeException(), isNull);
-  });
+      );
+      expect(find.text('canvas'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    },
+  );
 }

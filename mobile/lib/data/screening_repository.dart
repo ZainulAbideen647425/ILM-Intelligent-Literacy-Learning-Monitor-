@@ -15,7 +15,7 @@ abstract interface class ScreeningRepository {
 /// no real child data is ever stored in this repository.
 class MockScreeningRepository implements ScreeningRepository {
   MockScreeningRepository({AssetBundle? bundle})
-      : _bundle = bundle ?? rootBundle;
+    : _bundle = bundle ?? rootBundle;
 
   final AssetBundle _bundle;
 

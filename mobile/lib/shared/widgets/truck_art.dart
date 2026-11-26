@@ -11,12 +11,12 @@ class TruckArtBand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ExcludeSemantics(
-        child: SizedBox(
-          height: height,
-          width: double.infinity,
-          child: CustomPaint(painter: _ZigzagPainter()),
-        ),
-      );
+    child: SizedBox(
+      height: height,
+      width: double.infinity,
+      child: CustomPaint(painter: _ZigzagPainter()),
+    ),
+  );
 }
 
 class _ZigzagPainter extends CustomPainter {
@@ -55,11 +55,7 @@ class _ZigzagPainter extends CustomPainter {
 
 /// Patterned frame around a plain white work area (e.g. the writing canvas).
 class TruckArtFrame extends StatelessWidget {
-  const TruckArtFrame({
-    super.key,
-    required this.child,
-    this.borderWidth = 10,
-  });
+  const TruckArtFrame({super.key, required this.child, this.borderWidth = 10});
 
   final Widget child;
   final double borderWidth;
