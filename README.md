@@ -97,7 +97,8 @@ flowchart LR
 
 ```
 ILM-Intelligent-Literacy-Learning-Monitor/
-├── mobile/                     # Flutter teacher & child app
+├── mobile/                     # Flutter teacher & child app (Android 6.0+)
+│   ├── android/                # Android project (backups off, minSdk 23)
 │   ├── assets/fonts/           # Baloo 2, Atkinson Hyperlegible, Gulzar (SIL OFL)
 │   ├── assets/mock/            # Invented sample data (API-contract shape)
 │   ├── lib/core/               # Theme, design tokens, Urdu/English strings, models
@@ -111,8 +112,9 @@ ILM-Intelligent-Literacy-Learning-Monitor/
 ├── tools/gen_tokens.py         # Generates Dart + CSS tokens from design/tokens.json
 ├── docs/
 │   ├── api-contract.yaml       # OpenAPI contract shared by app, dashboard, backend
+│   ├── adr/                    # Architecture decision records
 │   └── testing/                # Test plan, test cases and gate reports (ISO/IEC/IEEE 29119-3)
-└── .github/workflows/ci.yml    # Tokens check, format, analyze, tests, secret scan
+└── .github/workflows/ci.yml    # Tokens check, format, analyze, tests, debug APK, secret scan
 ```
 
 ---
@@ -123,8 +125,8 @@ The frontend is built in a 2-week sprint of six phases. Each phase is merged thr
 
 | Phase | Scope | Status |
 |-------|-------|--------|
-| F1 · Days 1–2 | Project setup, design tokens, component library, CI | 🔄 In review |
-| F2 · Days 3–4 | Teacher login, PIN, class register | ⏳ Planned |
+| F1 · Days 1–2 | Project setup, design tokens, component library, CI | ✅ Gate passed ([report](docs/testing/F1-gate-report.md)) |
+| F2 · Days 3–4 | Teacher login, PIN, class register | ✅ Gate passed ([report](docs/testing/F2-gate-report.md)) |
 | F3 · Days 5–7 | Child writing and reading screens | ⏳ Planned |
 | F4 · Days 8–9 | Result screen, referral actions, full Urdu/English | ⏳ Planned |
 | F5 · Days 10–12 | Admin web dashboard | ⏳ Planned |
