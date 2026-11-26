@@ -1,5 +1,5 @@
 // F1-TC-23..24: app shell, language switch and right-to-left layout.
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ilm_mobile/app.dart';
 import 'package:ilm_mobile/features/gallery/component_gallery_screen.dart';

@@ -1,6 +1,6 @@
 // F1-TC-12..22: every Direction B component renders all its states and meets
 // the accessibility guidelines (target size, labels, contrast).
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ilm_mobile/core/models/models.dart';
 import 'package:ilm_mobile/shared/widgets/bead_progress.dart';
