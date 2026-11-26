@@ -28,6 +28,14 @@ class ChildTile extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           )
+        : student.hasPendingSession
+        ? Text(
+            s.awaitingResult,
+            style: theme.textTheme.bodySmall!.copyWith(
+              color: IlmColors.inkMuted,
+              fontWeight: FontWeight.w700,
+            ),
+          )
         : student.isNextUp
         ? Text(
             s.nextUp,
@@ -40,6 +48,8 @@ class ChildTile extends StatelessWidget {
 
     final statusLabel = !student.hasConsent
         ? s.needsConsent
+        : student.hasPendingSession
+        ? s.awaitingResult
         : student.isNextUp
         ? s.nextUp
         : student.signal.label(s);
