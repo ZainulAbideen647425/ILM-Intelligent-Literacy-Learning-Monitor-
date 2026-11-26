@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: ILM API (frontend contract)
+  version: 0.1.0
+  description: |
+    Contract shared by the Flutter app, the web dashboard and the Django
+    backend. During the 2-week frontend sprint both frontends run against
+    mock data in this exact shape; the backend implements it later.
+
+    Language rule: no field or value ever labels a child "dyslexic" or "weak".
+    Outputs are screening signals, not diagnoses.
+servers:
+  - url: /api/v1
+paths:
+  /classes/{classId}:
+    get:
+      summary: Class register with each child's latest signal
+      parameters:
+        - $ref: "#/components/parameters/classId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ClassRoom" }
+  /sessions:
+    post:
+      summary: Upload one child's screening session (handwriting strokes + reading audio)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema: { $ref: "#/components/schemas/SessionUpload" }
+      responses:
+        "202": { description: Accepted for scoring }
+  /children/{childId}/result:
+    get:
+      summary: Latest screening result (teacher only)
+      parameters:
+        - $ref: "#/components/parameters/childId"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Result" }
+        "204": { description: Session received, result still pending }
+  /referrals:
+    get:
+      summary: Referral list for the school (administrator only)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Referral" }
+    post:
+      summary: Add a child to the referral list or change its status
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/Referral" }
+      responses:
+        "201": { description: Created }
+components:
+  parameters:
+    classId:
+      name: classId
+      in: path
+      required: true
+      schema: { type: string }
+    childId:
+      name: childId
+      in: path
+      required: true
+      schema: { type: string }
+  schemas:
+    Signal:
+      type: string
+      enum: [follow_up, watch, all_clear, not_yet]
+    Level:
+      type: string
+      description: How often a pattern was seen. Shown as a word, never a number.
+      enum: [many, some, few]
+    Child:
+      type: object
+      required: [id, display_name, signal, has_consent]
+      properties:
+        id: { type: string }
+        display_name: { type: string, description: Shown to the class teacher only }
+        signal: { $ref: "#/components/schemas/Signal" }
+        has_consent: { type: boolean }
+        is_next_up: { type: boolean, default: false }
+    ClassRoom:
+      type: object
+      required: [id, name, name_ur, children]
+      properties:
+        id: { type: string }
+        name: { type: string, examples: ["Class 3-B"] }
+        name_ur: { type: string, examples: ["جماعت سوم ب"] }
+        saved_offline_count: { type: integer, minimum: 0 }
+        children:
+          type: array
+          items: { $ref: "#/components/schemas/Child" }
+    StrokePoint:
+      type: object
+      required: [x, y, t]
+      properties:
+        x: { type: number }
+        y: { type: number }
+        t: { type: integer, description: Milliseconds since the prompt was shown }
+        p: { type: [number, "null"], description: Pressure 0..1 when the device reports it }
+    SessionUpload:
+      type: object
+      required: [child_id, strokes]
+      properties:
+        child_id: { type: string }
+        strokes:
+          type: array
+          description: One entry per prompt; each prompt is a list of strokes.
+          items:
+            type: array
+            items:
+              type: array
+              items: { $ref: "#/components/schemas/StrokePoint" }
+        reading_audio:
+          type: string
+          format: binary
+          description: 16 kHz mono WAV
+    Observation:
+      type: object
+      required: [text_en, text_ur, signal]
+      properties:
+        text_en: { type: string }
+        text_ur: { type: string }
+        signal: { $ref: "#/components/schemas/Signal" }
+    Result:
+      type: object
+      required: [child_id, signal, writing_level, reading_level, observations]
+      properties:
+        child_id: { type: string }
+        signal: { $ref: "#/components/schemas/Signal" }
+        writing_level: { $ref: "#/components/schemas/Level" }
+        reading_level: { $ref: "#/components/schemas/Level" }
+        observations:
+          type: array
+          maxItems: 3
+          items: { $ref: "#/components/schemas/Observation" }
+    Referral:
+      type: object
+      required: [child_id, status]
+      properties:
+        child_id: { type: string }
+        status:
+          type: string
+          enum: [meet_parents, send_referral, chase_clinic, getting_help, closed]
+        note: { type: string }
+        updated_at: { type: string, format: date-time }

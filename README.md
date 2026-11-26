@@ -16,6 +16,7 @@
 - [How It Works](#how-it-works)
 - [System Architecture](#system-architecture)
 - [Repository Structure](#repository-structure)
+- [Frontend Sprint Progress](#frontend-sprint-progress)
 - [Tech Stack](#tech-stack)
 - [Research Questions](#research-questions)
 - [Getting Started](#getting-started)
@@ -95,30 +96,39 @@ flowchart LR
 ## Repository Structure
 
 ```
-ilm-dyslexia-screening/
-├── mobile/                 # Flutter teacher app (handwriting + audio capture, offline sync)
-│   ├── lib/
-│   └── test/               # Flutter widget tests
-├── backend/                # Django project
-│   ├── apps/
-│   │   ├── accounts/       # Auth, roles (teacher, school admin), RBAC
-│   │   ├── screening/      # Students, sessions, exercises, results
-│   │   ├── inference/      # Wrapper around trained models
-│   │   └── referrals/      # Referral status + report export
-│   ├── dashboard/          # Admin web dashboard (templates/static)
-│   └── tests/              # pytest suites
-├── ml/
-│   ├── handwriting/        # Stroke preprocessing, feature extraction, CNN-LSTM
-│   ├── reading_fluency/    # ASR, forced alignment, fluency features, classifier
-│   ├── fusion/             # Composite risk scoring + threshold calibration
-│   ├── notebooks/          # Exploration & error analysis
-│   └── tests/
-├── data/                   # ⚠️ Schemas & synthetic samples ONLY — no real child data
-│   ├── schemas/
-│   └── synthetic/
-├── docs/                   # Proposal, design docs, consent templates, reports
-└── README.md
+ILM-Intelligent-Literacy-Learning-Monitor/
+├── mobile/                     # Flutter teacher & child app
+│   ├── assets/fonts/           # Baloo 2, Atkinson Hyperlegible, Gulzar (SIL OFL)
+│   ├── assets/mock/            # Invented sample data (API-contract shape)
+│   ├── lib/core/               # Theme, design tokens, Urdu/English strings, models
+│   ├── lib/data/               # Repository interface + mock implementation
+│   ├── lib/shared/widgets/     # Direction B component library
+│   ├── lib/features/           # Screens, one folder per feature
+│   └── test/                   # Unit, widget and accessibility tests
+├── backend/
+│   └── dashboard/static/css/   # Generated design tokens for the web dashboard
+├── design/tokens.json          # Single source of truth for colours, type, spacing
+├── tools/gen_tokens.py         # Generates Dart + CSS tokens from design/tokens.json
+├── docs/
+│   ├── api-contract.yaml       # OpenAPI contract shared by app, dashboard, backend
+│   └── testing/                # Test plan, test cases and gate reports (ISO/IEC/IEEE 29119-3)
+└── .github/workflows/ci.yml    # Tokens check, format, analyze, tests, secret scan
 ```
+
+---
+
+## Frontend Sprint Progress
+
+The frontend is built in a 2-week sprint of six phases. Each phase is merged through its own pull request and must pass its test gate.
+
+| Phase | Scope | Status |
+|-------|-------|--------|
+| F1 · Days 1–2 | Project setup, design tokens, component library, CI | 🔄 In review |
+| F2 · Days 3–4 | Teacher login, PIN, class register | ⏳ Planned |
+| F3 · Days 5–7 | Child writing and reading screens | ⏳ Planned |
+| F4 · Days 8–9 | Result screen, referral actions, full Urdu/English | ⏳ Planned |
+| F5 · Days 10–12 | Admin web dashboard | ⏳ Planned |
+| F6 · Days 13–14 | Regression, usability, acceptance | ⏳ Planned |
 
 ---
 
