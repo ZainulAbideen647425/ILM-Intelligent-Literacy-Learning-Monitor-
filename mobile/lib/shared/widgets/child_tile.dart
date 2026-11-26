@@ -87,7 +87,8 @@ class ChildTile extends StatelessWidget {
           child: InkWell(
             onTap: enabled ? onTap : null,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(minHeight: IlmSize.minTouchTarget),
+              constraints:
+                  const BoxConstraints(minHeight: IlmSize.minTouchTarget),
               child: content,
             ),
           ),
@@ -104,12 +105,12 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final background = student.signal == Signal.notYet
-        ? IlmColors.sand
-        : student.signal.color;
-    final foreground = student.signal == Signal.notYet || student.signal == Signal.watch
-        ? IlmColors.aubergine
-        : IlmColors.white;
+    final background =
+        student.signal == Signal.notYet ? IlmColors.sand : student.signal.color;
+    final foreground =
+        student.signal == Signal.notYet || student.signal == Signal.watch
+            ? IlmColors.aubergine
+            : IlmColors.white;
     return Container(
       width: 40,
       height: 40,

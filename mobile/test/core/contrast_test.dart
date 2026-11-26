@@ -44,7 +44,11 @@ void main() {
     });
 
     test('F1-TC-03 white text on dark fills (header, avatars)', () {
-      for (final fill in [IlmColors.aubergine, IlmColors.rose, IlmColors.peacock]) {
+      for (final fill in [
+        IlmColors.aubergine,
+        IlmColors.rose,
+        IlmColors.peacock
+      ]) {
         expect(
           Contrast.ratio(IlmColors.white, fill),
           greaterThanOrEqualTo(Contrast.aaNormalText),

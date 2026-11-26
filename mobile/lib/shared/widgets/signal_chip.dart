@@ -67,7 +67,8 @@ class _SignalShapePainter extends CustomPainter {
     switch (signal) {
       case Signal.followUp:
         canvas.drawRRect(
-          RRect.fromRectAndRadius(rect, Radius.circular(size.shortestSide * 0.2)),
+          RRect.fromRectAndRadius(
+              rect, Radius.circular(size.shortestSide * 0.2)),
           fill,
         );
       case Signal.watch:

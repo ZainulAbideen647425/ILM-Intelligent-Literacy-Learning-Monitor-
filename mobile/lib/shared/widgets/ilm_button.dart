@@ -34,8 +34,9 @@ class IlmButton extends StatelessWidget {
     final isPrimary = variant == IlmButtonVariant.primary;
     final textStyle = Theme.of(context).textTheme.labelLarge!.copyWith(
           color: IlmColors.aubergine,
-          fontVariations:
-              Directionality.of(context) == TextDirection.rtl ? null : AppTheme.headingBold,
+          fontVariations: Directionality.of(context) == TextDirection.rtl
+              ? null
+              : AppTheme.headingBold,
         );
     final style = ButtonStyle(
       minimumSize: const WidgetStatePropertyAll(

@@ -14,7 +14,8 @@ abstract interface class ScreeningRepository {
 /// Serves sample data from `assets/mock/`. All names are invented sample data;
 /// no real child data is ever stored in this repository.
 class MockScreeningRepository implements ScreeningRepository {
-  MockScreeningRepository({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
+  MockScreeningRepository({AssetBundle? bundle})
+      : _bundle = bundle ?? rootBundle;
 
   final AssetBundle _bundle;
 

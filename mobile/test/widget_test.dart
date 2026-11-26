@@ -5,7 +5,8 @@ import 'package:ilm_mobile/app.dart';
 import 'package:ilm_mobile/features/gallery/component_gallery_screen.dart';
 
 void main() {
-  testWidgets('F1-TC-23 app starts on the component gallery in English (LTR)', (tester) async {
+  testWidgets('F1-TC-23 app starts on the component gallery in English (LTR)',
+      (tester) async {
     await tester.pumpWidget(const IlmApp());
     await tester.pumpAndSettle();
     expect(find.byType(ComponentGalleryScreen), findsOneWidget);
@@ -14,7 +15,8 @@ void main() {
     expect(Directionality.of(context), TextDirection.ltr);
   });
 
-  testWidgets('F1-TC-24 switching to Urdu flips the layout to RTL', (tester) async {
+  testWidgets('F1-TC-24 switching to Urdu flips the layout to RTL',
+      (tester) async {
     await tester.pumpWidget(const IlmApp());
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('toggle-language')));

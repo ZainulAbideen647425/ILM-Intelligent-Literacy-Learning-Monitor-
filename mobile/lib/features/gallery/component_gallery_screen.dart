@@ -29,11 +29,32 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
   _Filter _filter = _Filter.everyone;
 
   static const _samples = [
-    Child(id: 's1', displayName: 'Areeba Khan', signal: Signal.followUp, hasConsent: true),
-    Child(id: 's2', displayName: 'Faraz Malik', signal: Signal.watch, hasConsent: true),
-    Child(id: 's3', displayName: 'Hania Qureshi', signal: Signal.allClear, hasConsent: true),
-    Child(id: 's4', displayName: 'Noor Fatima', signal: Signal.notYet, hasConsent: true, isNextUp: true),
-    Child(id: 's5', displayName: 'Saad Rehman', signal: Signal.notYet, hasConsent: false),
+    Child(
+        id: 's1',
+        displayName: 'Areeba Khan',
+        signal: Signal.followUp,
+        hasConsent: true),
+    Child(
+        id: 's2',
+        displayName: 'Faraz Malik',
+        signal: Signal.watch,
+        hasConsent: true),
+    Child(
+        id: 's3',
+        displayName: 'Hania Qureshi',
+        signal: Signal.allClear,
+        hasConsent: true),
+    Child(
+        id: 's4',
+        displayName: 'Noor Fatima',
+        signal: Signal.notYet,
+        hasConsent: true,
+        isNextUp: true),
+    Child(
+        id: 's5',
+        displayName: 'Saad Rehman',
+        signal: Signal.notYet,
+        hasConsent: false),
   ];
 
   @override
@@ -62,7 +83,8 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
             onPressed: widget.onToggleLanguage,
             style: TextButton.styleFrom(
               foregroundColor: IlmColors.white,
-              minimumSize: const Size(IlmSize.minTouchTarget, IlmSize.minTouchTarget),
+              minimumSize:
+                  const Size(IlmSize.minTouchTarget, IlmSize.minTouchTarget),
             ),
             child: Text(s.isUrdu ? 'English' : 'اردو'),
           ),
@@ -117,8 +139,10 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
               onChanged: (f) => setState(() => _filter = f),
               options: [
                 FilterOption(value: _Filter.everyone, label: s.filterEveryone),
-                FilterOption(value: _Filter.followUp, label: s.signalFollowUp, count: 2),
-                FilterOption(value: _Filter.notYet, label: s.signalNotYet, count: 14),
+                FilterOption(
+                    value: _Filter.followUp, label: s.signalFollowUp, count: 2),
+                FilterOption(
+                    value: _Filter.notYet, label: s.signalNotYet, count: 14),
               ],
             ),
           ),
@@ -177,7 +201,8 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
                 child: Center(
                   child: Text(
                     s.useYourFinger,
-                    style: theme.textTheme.bodySmall!.copyWith(color: IlmColors.inkMuted),
+                    style: theme.textTheme.bodySmall!
+                        .copyWith(color: IlmColors.inkMuted),
                   ),
                 ),
               ),
@@ -190,7 +215,8 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
               children: [
                 const MedallionBadge(signal: Signal.followUp),
                 const SizedBox(height: IlmSpace.md),
-                Text(s.screeningNotDiagnosis, style: theme.textTheme.bodyMedium),
+                Text(s.screeningNotDiagnosis,
+                    style: theme.textTheme.bodyMedium),
                 const SizedBox(height: IlmSpace.lg),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
