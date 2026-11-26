@@ -30,9 +30,7 @@ abstract final class Contrast {
     return (lighter + 0.05) / (darker + 0.05);
   }
 
-  // Reads one 8-bit channel from the ARGB value without relying on
-  // Color getters that changed between Flutter releases.
-  // ignore: deprecated_member_use
+  // Reads one 8-bit channel from the 32-bit ARGB value.
   static double _component(Color c, int shift) =>
-      ((c.value >> shift) & 0xFF) / 255.0;
+      ((c.toARGB32() >> shift) & 0xFF) / 255.0;
 }
