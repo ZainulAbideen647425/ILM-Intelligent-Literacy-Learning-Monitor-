@@ -67,7 +67,10 @@ class _ChildSessionScreenState extends State<ChildSessionScreen> {
                     IconButton(
                       key: const Key('teacher-exit'),
                       tooltip: s.teacherExit,
-                      icon: const Icon(Icons.lock_outline, color: IlmColors.inkMuted),
+                      icon: const Icon(
+                        Icons.lock_outline,
+                        color: IlmColors.inkMuted,
+                      ),
                       onPressed: _requestExit,
                     ),
                   ],
@@ -87,7 +90,9 @@ class _ChildSessionScreenState extends State<ChildSessionScreen> {
                         padding: const EdgeInsets.all(IlmSpace.md),
                         child: Text(
                           s.useYourFinger,
-                          style: theme.textTheme.bodySmall!.copyWith(color: IlmColors.inkMuted),
+                          style: theme.textTheme.bodySmall!.copyWith(
+                            color: IlmColors.inkMuted,
+                          ),
                         ),
                       ),
                     ),

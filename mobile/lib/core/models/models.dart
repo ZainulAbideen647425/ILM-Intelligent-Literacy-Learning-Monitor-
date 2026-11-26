@@ -75,15 +75,14 @@ class Child {
     bool? hasConsent,
     bool? isNextUp,
     bool? hasPendingSession,
-  }) =>
-      Child(
-        id: id,
-        displayName: displayName,
-        signal: signal ?? this.signal,
-        hasConsent: hasConsent ?? this.hasConsent,
-        isNextUp: isNextUp ?? this.isNextUp,
-        hasPendingSession: hasPendingSession ?? this.hasPendingSession,
-      );
+  }) => Child(
+    id: id,
+    displayName: displayName,
+    signal: signal ?? this.signal,
+    hasConsent: hasConsent ?? this.hasConsent,
+    isNextUp: isNextUp ?? this.isNextUp,
+    hasPendingSession: hasPendingSession ?? this.hasPendingSession,
+  );
 
   /// Up to two initials from the display name, e.g. "Areeba Khan" -> "AK".
   String get initials {

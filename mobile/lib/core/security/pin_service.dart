@@ -30,7 +30,7 @@ class InMemoryPinStore implements PinStore {
 /// child data never leave the device.
 class SecurePinStore implements PinStore {
   SecurePinStore([FlutterSecureStorage? storage])
-      : _storage = storage ?? const FlutterSecureStorage();
+    : _storage = storage ?? const FlutterSecureStorage();
 
   final FlutterSecureStorage _storage;
 
@@ -48,7 +48,11 @@ class SecurePinStore implements PinStore {
 enum PinStatus { ok, wrong, locked }
 
 class PinCheckResult {
-  const PinCheckResult(this.status, {this.attemptsLeft = 0, this.lockRemaining = Duration.zero});
+  const PinCheckResult(
+    this.status, {
+    this.attemptsLeft = 0,
+    this.lockRemaining = Duration.zero,
+  });
 
   final PinStatus status;
   final int attemptsLeft;
@@ -62,8 +66,8 @@ class PinCheckResult {
 /// account password; the lockout is what makes guessing impractical.
 class PinService {
   PinService(this._store, {DateTime Function()? clock, Random? random})
-      : _now = clock ?? DateTime.now,
-        _random = random ?? Random.secure();
+    : _now = clock ?? DateTime.now,
+      _random = random ?? Random.secure();
 
   static const int pinLength = 4;
   static const int maxAttempts = 5;
@@ -87,9 +91,15 @@ class PinService {
 
   Future<void> setPin(String pin) async {
     if (!isValidFormat(pin)) {
-      throw ArgumentError.value('****', 'pin', 'must be exactly $pinLength digits');
+      throw ArgumentError.value(
+        '****',
+        'pin',
+        'must be exactly $pinLength digits',
+      );
     }
-    final salt = base64Encode(List<int>.generate(16, (_) => _random.nextInt(256)));
+    final salt = base64Encode(
+      List<int>.generate(16, (_) => _random.nextInt(256)),
+    );
     await _store.write(_kSalt, salt);
     await _store.write(_kHash, _hash(pin, salt));
     await _store.write(_kFailed, '0');
@@ -116,7 +126,10 @@ class PinService {
       final until = _now().add(lockDuration);
       await _store.write(_kLockedUntil, until.toIso8601String());
       await _store.write(_kFailed, '0');
-      return const PinCheckResult(PinStatus.locked, lockRemaining: lockDuration);
+      return const PinCheckResult(
+        PinStatus.locked,
+        lockRemaining: lockDuration,
+      );
     }
     await _store.write(_kFailed, '$failed');
     return PinCheckResult(PinStatus.wrong, attemptsLeft: maxAttempts - failed);

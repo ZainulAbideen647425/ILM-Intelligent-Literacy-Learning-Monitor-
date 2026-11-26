@@ -32,8 +32,8 @@ class _PinScreenState extends State<PinScreen> {
     final title = widget.mode == PinMode.unlock
         ? s.enterPin
         : _firstEntry == null
-            ? s.createPin
-            : s.confirmPin;
+        ? s.createPin
+        : s.confirmPin;
 
     return Scaffold(
       body: SafeArea(
@@ -45,7 +45,9 @@ class _PinScreenState extends State<PinScreen> {
               padding: const EdgeInsets.all(IlmSpace.lg),
               child: Text(
                 s.appName,
-                style: theme.textTheme.headlineMedium!.copyWith(color: IlmColors.marigold),
+                style: theme.textTheme.headlineMedium!.copyWith(
+                  color: IlmColors.marigold,
+                ),
               ),
             ),
             const TruckArtBand(),
@@ -55,10 +57,14 @@ class _PinScreenState extends State<PinScreen> {
                 child: PinEntry(
                   padKey: _pad,
                   title: title,
-                  help: widget.mode == PinMode.create && _firstEntry == null ? s.createPinHelp : null,
+                  help: widget.mode == PinMode.create && _firstEntry == null
+                      ? s.createPinHelp
+                      : null,
                   message: _message,
                   messageIsError: _messageIsError,
-                  onCompleted: (pin) => widget.mode == PinMode.create ? _onCreate(pin) : _onUnlock(pin),
+                  onCompleted: (pin) => widget.mode == PinMode.create
+                      ? _onCreate(pin)
+                      : _onUnlock(pin),
                 ),
               ),
             ),
@@ -155,13 +161,20 @@ class PinEntry extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(title, key: const Key('pin-title'), style: theme.textTheme.headlineSmall, textAlign: TextAlign.center),
+        Text(
+          title,
+          key: const Key('pin-title'),
+          style: theme.textTheme.headlineSmall,
+          textAlign: TextAlign.center,
+        ),
         if (help != null) ...[
           const SizedBox(height: IlmSpace.sm),
           Text(
             help!,
             textAlign: TextAlign.center,
-            style: theme.textTheme.bodyMedium!.copyWith(color: IlmColors.inkMuted),
+            style: theme.textTheme.bodyMedium!.copyWith(
+              color: IlmColors.inkMuted,
+            ),
           ),
         ],
         const SizedBox(height: IlmSpace.md),
@@ -176,7 +189,9 @@ class PinEntry extends StatelessWidget {
                     key: const Key('pin-message'),
                     textAlign: TextAlign.center,
                     style: theme.textTheme.bodyMedium!.copyWith(
-                      color: messageIsError ? IlmColors.rose : IlmColors.peacock,
+                      color: messageIsError
+                          ? IlmColors.rose
+                          : IlmColors.peacock,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

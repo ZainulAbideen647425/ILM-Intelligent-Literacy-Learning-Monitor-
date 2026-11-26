@@ -42,12 +42,12 @@ class PinPadState extends State<PinPad> {
   Widget build(BuildContext context) {
     final s = AppStrings.of(context);
     Widget key(String digit) => _PadKey(
-          key: ValueKey('pin-key-$digit'),
-          label: digit,
-          semanticLabel: digit,
-          enabled: widget.enabled,
-          onTap: () => _press(digit),
-        );
+      key: ValueKey('pin-key-$digit'),
+      label: digit,
+      semanticLabel: digit,
+      enabled: widget.enabled,
+      onTap: () => _press(digit),
+    );
 
     return Directionality(
       textDirection: TextDirection.ltr,
@@ -69,7 +69,9 @@ class PinPadState extends State<PinPad> {
                     margin: const EdgeInsets.symmetric(horizontal: IlmSpace.sm),
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: i < _digits.length ? IlmColors.aubergine : IlmColors.white,
+                      color: i < _digits.length
+                          ? IlmColors.aubergine
+                          : IlmColors.white,
                       border: Border.all(color: IlmColors.aubergine, width: 2),
                     ),
                   ),
@@ -82,7 +84,10 @@ class PinPadState extends State<PinPad> {
             ['4', '5', '6'],
             ['7', '8', '9'],
           ])
-            Row(mainAxisSize: MainAxisSize.min, children: [for (final d in row) key(d)]),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [for (final d in row) key(d)],
+            ),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [

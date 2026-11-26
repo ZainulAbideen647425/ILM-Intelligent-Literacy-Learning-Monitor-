@@ -24,7 +24,10 @@ void main() {
       '٠١٢٣': false, // Arabic-Indic digits are not accepted by the pad
     };
     cases.forEach((pin, valid) {
-      test('"$pin" -> $valid', () => expect(PinService.isValidFormat(pin), valid));
+      test(
+        '"$pin" -> $valid',
+        () => expect(PinService.isValidFormat(pin), valid),
+      );
     });
 
     test('setPin rejects an invalid PIN', () {
@@ -51,12 +54,15 @@ void main() {
     expect(store.values['pin_salt'], isNotNull);
   });
 
-  test('F2-TC-04 same PIN gets a different hash on each device (salted)', () async {
-    final other = InMemoryPinStore();
-    await pins.setPin('2468');
-    await PinService(other).setPin('2468');
-    expect(store.values['pin_hash'], isNot(other.values['pin_hash']));
-  });
+  test(
+    'F2-TC-04 same PIN gets a different hash on each device (salted)',
+    () async {
+      final other = InMemoryPinStore();
+      await pins.setPin('2468');
+      await PinService(other).setPin('2468');
+      expect(store.values['pin_hash'], isNot(other.values['pin_hash']));
+    },
+  );
 
   test('F2-TC-05 fifth wrong try locks for 30 s (boundary: 4 vs 5)', () async {
     await pins.setPin('2468');
@@ -82,7 +88,10 @@ void main() {
     expect((await pins.verify('2468')).status, PinStatus.locked);
     now = now.add(const Duration(seconds: 2));
     expect((await pins.verify('2468')).status, PinStatus.ok);
-    expect((await pins.verify('0000')).attemptsLeft, PinService.maxAttempts - 1);
+    expect(
+      (await pins.verify('0000')).attemptsLeft,
+      PinService.maxAttempts - 1,
+    );
   });
 
   test('F2-TC-07 a correct PIN resets the wrong-try counter', () async {
@@ -90,7 +99,10 @@ void main() {
     await pins.verify('0000');
     await pins.verify('0000');
     await pins.verify('2468');
-    expect((await pins.verify('0000')).attemptsLeft, PinService.maxAttempts - 1);
+    expect(
+      (await pins.verify('0000')).attemptsLeft,
+      PinService.maxAttempts - 1,
+    );
   });
 
   test('verify without a PIN is a programming error', () {

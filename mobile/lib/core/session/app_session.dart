@@ -69,8 +69,11 @@ class AppSession extends ChangeNotifier {
 
 /// Makes the [AppSession] available to the widget tree.
 class SessionScope extends InheritedNotifier<AppSession> {
-  const SessionScope({super.key, required AppSession session, required super.child})
-      : super(notifier: session);
+  const SessionScope({
+    super.key,
+    required AppSession session,
+    required super.child,
+  }) : super(notifier: session);
 
   static AppSession of(BuildContext context) {
     final scope = context.dependOnInheritedWidgetOfExactType<SessionScope>();
@@ -80,7 +83,8 @@ class SessionScope extends InheritedNotifier<AppSession> {
 
   /// Reads the session without rebuilding when it changes.
   static AppSession read(BuildContext context) {
-    final element = context.getElementForInheritedWidgetOfExactType<SessionScope>();
+    final element = context
+        .getElementForInheritedWidgetOfExactType<SessionScope>();
     assert(element != null, 'No SessionScope above this widget.');
     return (element!.widget as SessionScope).notifier!;
   }

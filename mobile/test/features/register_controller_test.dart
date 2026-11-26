@@ -10,14 +10,20 @@ void main() {
   late RegisterController controller;
 
   setUp(() async {
-    controller = RegisterController(repository: MockScreeningRepository(), classId: 'class-3b');
+    controller = RegisterController(
+      repository: MockScreeningRepository(),
+      classId: 'class-3b',
+    );
     await controller.load();
   });
 
   test('F2-TC-11 filters return the right children', () {
     expect(controller.visibleChildren, hasLength(8));
     controller.setFilter(RegisterFilter.followUp);
-    expect(controller.visibleChildren.map((c) => c.displayName), ['Areeba Khan', 'Mahnoor Ali']);
+    expect(controller.visibleChildren.map((c) => c.displayName), [
+      'Areeba Khan',
+      'Mahnoor Ali',
+    ]);
     controller.setFilter(RegisterFilter.notYet);
     expect(controller.visibleChildren.map((c) => c.id), ['c05', 'c06', 'c08']);
   });
@@ -44,15 +50,26 @@ void main() {
   });
 
   test('load error is reported, not thrown', () async {
-    final bad = RegisterController(repository: MockScreeningRepository(), classId: 'missing');
+    final bad = RegisterController(
+      repository: MockScreeningRepository(),
+      classId: 'missing',
+    );
     await bad.load();
     expect(bad.error, isA<ArgumentError>());
     expect(bad.classRoom, isNull);
   });
 
-  test('a child is screened only once: signals other than not-yet cannot start', () {
-    const done = Child(id: 'x', displayName: 'X Y', signal: Signal.allClear, hasConsent: true);
-    expect(done.canStart, isFalse);
-    expect(done.firstName, 'X');
-  });
+  test(
+    'a child is screened only once: signals other than not-yet cannot start',
+    () {
+      const done = Child(
+        id: 'x',
+        displayName: 'X Y',
+        signal: Signal.allClear,
+        hasConsent: true,
+      );
+      expect(done.canStart, isFalse);
+      expect(done.firstName, 'X');
+    },
+  );
 }

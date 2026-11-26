@@ -34,7 +34,8 @@ class IlmApp extends StatefulWidget {
 
 class _IlmAppState extends State<IlmApp> {
   late Locale _locale = widget.initialLocale;
-  late final AppSession _session = widget.session ??
+  late final AppSession _session =
+      widget.session ??
       AppSession(
         auth: const MockAuthRepository(),
         pins: PinService(SecurePinStore()),
@@ -48,8 +49,10 @@ class _IlmAppState extends State<IlmApp> {
   }
 
   void _toggleLocale() => setState(() {
-        _locale = _locale.languageCode == 'ur' ? const Locale('en') : const Locale('ur');
-      });
+    _locale = _locale.languageCode == 'ur'
+        ? const Locale('en')
+        : const Locale('ur');
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +85,20 @@ class _Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final session = SessionScope.of(context);
     return switch (session.stage) {
-      SessionStage.signedOut => SignInScreen(onToggleLanguage: onToggleLanguage),
-      SessionStage.createPin => const PinScreen(key: ValueKey('pin-create'), mode: PinMode.create),
-      SessionStage.locked => const PinScreen(key: ValueKey('pin-unlock'), mode: PinMode.unlock),
-      SessionStage.unlocked => ClassRegisterScreen(onToggleLanguage: onToggleLanguage),
+      SessionStage.signedOut => SignInScreen(
+        onToggleLanguage: onToggleLanguage,
+      ),
+      SessionStage.createPin => const PinScreen(
+        key: ValueKey('pin-create'),
+        mode: PinMode.create,
+      ),
+      SessionStage.locked => const PinScreen(
+        key: ValueKey('pin-unlock'),
+        mode: PinMode.unlock,
+      ),
+      SessionStage.unlocked => ClassRegisterScreen(
+        onToggleLanguage: onToggleLanguage,
+      ),
     };
   }
 }

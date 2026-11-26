@@ -70,7 +70,8 @@ class AppStrings {
       'invalidEmail': 'Enter a valid email address.',
       'passwordTooShort': 'Password must be at least 8 characters.',
       'createPin': 'Create a 4-digit PIN',
-      'createPinHelp': 'You will use it to unlock the app and leave child mode.',
+      'createPinHelp':
+          'You will use it to unlock the app and leave child mode.',
       'confirmPin': 'Enter the same PIN again',
       'enterPin': 'Enter your PIN',
       'pinMismatch': 'The PINs did not match. Try again.',

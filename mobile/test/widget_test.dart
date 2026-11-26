@@ -14,12 +14,14 @@ import 'helpers.dart';
 
 void main() {
   AppSession newSession() => AppSession(
-        auth: const MockAuthRepository(),
-        pins: PinService(InMemoryPinStore()),
-        screening: MockScreeningRepository(),
-      );
+    auth: const MockAuthRepository(),
+    pins: PinService(InMemoryPinStore()),
+    screening: MockScreeningRepository(),
+  );
 
-  testWidgets('F1-TC-23 app starts on sign-in in English (LTR)', (tester) async {
+  testWidgets('F1-TC-23 app starts on sign-in in English (LTR)', (
+    tester,
+  ) async {
     await tester.pumpWidget(IlmApp(session: newSession()));
     await tester.pumpAndSettle();
     expect(find.byType(SignInScreen), findsOneWidget);
@@ -27,7 +29,9 @@ void main() {
     expect(Directionality.of(context), TextDirection.ltr);
   });
 
-  testWidgets('F1-TC-24 switching to Urdu flips the layout to RTL', (tester) async {
+  testWidgets('F1-TC-24 switching to Urdu flips the layout to RTL', (
+    tester,
+  ) async {
     await tester.pumpWidget(IlmApp(session: newSession()));
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('toggle-language')));
@@ -38,7 +42,9 @@ void main() {
     expect(Theme.of(context).textTheme.bodyMedium!.fontFamily, 'Gulzar');
   });
 
-  testWidgets('sign-in screen meets tap-target and label guidelines', (tester) async {
+  testWidgets('sign-in screen meets tap-target and label guidelines', (
+    tester,
+  ) async {
     final handle = tester.ensureSemantics();
     await tester.pumpWidget(IlmApp(session: newSession()));
     await tester.pumpAndSettle();

@@ -31,7 +31,10 @@ class _ClassRegisterScreenState extends State<ClassRegisterScreen> {
     super.didChangeDependencies();
     if (_controller == null) {
       final session = SessionScope.read(context);
-      _controller = RegisterController(repository: session.screening, classId: session.classId)..load();
+      _controller = RegisterController(
+        repository: session.screening,
+        classId: session.classId,
+      )..load();
     }
   }
 
@@ -60,7 +63,9 @@ class _ClassRegisterScreenState extends State<ClassRegisterScreen> {
       builder: (context, _) {
         final room = controller.classRoom;
         if (room == null) {
-          return const Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
         return Scaffold(
           body: SafeArea(
@@ -68,7 +73,9 @@ class _ClassRegisterScreenState extends State<ClassRegisterScreen> {
             child: Column(
               children: [
                 _Header(room: room, onToggleLanguage: widget.onToggleLanguage),
-                Expanded(child: _Body(controller: controller, onStart: _start)),
+                Expanded(
+                  child: _Body(controller: controller, onStart: _start),
+                ),
               ],
             ),
           ),
@@ -94,14 +101,28 @@ class _Header extends StatelessWidget {
       children: [
         Container(
           color: IlmColors.aubergine,
-          padding: const EdgeInsetsDirectional.fromSTEB(IlmSpace.lg, IlmSpace.sm, IlmSpace.sm, IlmSpace.lg),
+          padding: const EdgeInsetsDirectional.fromSTEB(
+            IlmSpace.lg,
+            IlmSpace.sm,
+            IlmSpace.sm,
+            IlmSpace.lg,
+          ),
           child: Column(
             children: [
               Row(
                 children: [
-                  Text(s.appName, style: theme.textTheme.titleLarge!.copyWith(color: IlmColors.marigold)),
+                  Text(
+                    s.appName,
+                    style: theme.textTheme.titleLarge!.copyWith(
+                      color: IlmColors.marigold,
+                    ),
+                  ),
                   const Spacer(),
-                  Text('${room.savedOfflineCount} ${s.savedOffline}', key: const Key('saved-offline'), style: white),
+                  Text(
+                    '${room.savedOfflineCount} ${s.savedOffline}',
+                    key: const Key('saved-offline'),
+                    style: white,
+                  ),
                   LanguageButton(onPressed: onToggleLanguage),
                   IconButton(
                     key: const Key('sign-out'),
@@ -122,12 +143,19 @@ class _Header extends StatelessWidget {
                         Text(
                           room.name,
                           textDirection: TextDirection.ltr,
-                          style: theme.textTheme.headlineMedium!.copyWith(color: IlmColors.white),
+                          style: theme.textTheme.headlineMedium!.copyWith(
+                            color: IlmColors.white,
+                          ),
                         ),
                         Text(
                           room.nameUr,
                           textDirection: TextDirection.rtl,
-                          style: const TextStyle(fontFamily: IlmFonts.urdu, fontSize: 16, height: 1.8, color: IlmColors.white),
+                          style: const TextStyle(
+                            fontFamily: IlmFonts.urdu,
+                            fontSize: 16,
+                            height: 1.8,
+                            color: IlmColors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -158,13 +186,21 @@ class _Body extends StatelessWidget {
     return CustomScrollView(
       slivers: [
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(IlmSpace.lg, IlmSpace.lg, IlmSpace.lg, IlmSpace.md),
+          padding: const EdgeInsets.fromLTRB(
+            IlmSpace.lg,
+            IlmSpace.lg,
+            IlmSpace.lg,
+            IlmSpace.md,
+          ),
           sliver: SliverToBoxAdapter(
             child: FilterBar<RegisterFilter>(
               selected: controller.filter,
               onChanged: controller.setFilter,
               options: [
-                FilterOption(value: RegisterFilter.everyone, label: s.filterEveryone),
+                FilterOption(
+                  value: RegisterFilter.everyone,
+                  label: s.filterEveryone,
+                ),
                 FilterOption(
                   value: RegisterFilter.followUp,
                   label: s.signalFollowUp,
@@ -188,7 +224,12 @@ class _Body extends StatelessWidget {
           )
         else
           SliverPadding(
-            padding: const EdgeInsets.fromLTRB(IlmSpace.lg, 0, IlmSpace.lg, IlmSpace.lg),
+            padding: const EdgeInsets.fromLTRB(
+              IlmSpace.lg,
+              0,
+              IlmSpace.lg,
+              IlmSpace.lg,
+            ),
             sliver: SliverGrid(
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 220,
@@ -196,17 +237,14 @@ class _Body extends StatelessWidget {
                 mainAxisSpacing: IlmSpace.md,
                 crossAxisSpacing: IlmSpace.md,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, i) {
-                  final child = children[i];
-                  return ChildTile(
-                    key: ValueKey('tile-${child.id}'),
-                    student: child,
-                    onTap: child.canStart ? () => onStart(child) : null,
-                  );
-                },
-                childCount: children.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, i) {
+                final child = children[i];
+                return ChildTile(
+                  key: ValueKey('tile-${child.id}'),
+                  student: child,
+                  onTap: child.canStart ? () => onStart(child) : null,
+                );
+              }, childCount: children.length),
             ),
           ),
       ],
@@ -226,13 +264,24 @@ class _StartBar extends StatelessWidget {
     final next = room.nextChild;
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(IlmSpace.lg, IlmSpace.sm, IlmSpace.lg, IlmSpace.lg),
+        padding: const EdgeInsets.fromLTRB(
+          IlmSpace.lg,
+          IlmSpace.sm,
+          IlmSpace.lg,
+          IlmSpace.lg,
+        ),
         child: next == null
-            ? Text(s.allScreened, textAlign: TextAlign.center, style: Theme.of(context).textTheme.titleMedium)
+            ? Text(
+                s.allScreened,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium,
+              )
             : IlmButton(
                 key: const Key('start-next'),
                 label: '${s.startWith} ${next.firstName}',
-                icon: Directionality.of(context) == TextDirection.rtl ? Icons.arrow_back : Icons.arrow_forward,
+                icon: Directionality.of(context) == TextDirection.rtl
+                    ? Icons.arrow_back
+                    : Icons.arrow_forward,
                 onPressed: () => onStart(next),
               ),
       ),

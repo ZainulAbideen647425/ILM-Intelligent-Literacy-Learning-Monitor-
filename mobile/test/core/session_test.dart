@@ -9,20 +9,47 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   AppSession newSession([PinService? pins]) => AppSession(
-        auth: const MockAuthRepository(),
-        pins: pins ?? PinService(InMemoryPinStore()),
-        screening: MockScreeningRepository(),
-      );
+    auth: const MockAuthRepository(),
+    pins: pins ?? PinService(InMemoryPinStore()),
+    screening: MockScreeningRepository(),
+  );
 
   group('F2-TC-08 sign-in validation (equivalence partitions)', () {
     const auth = MockAuthRepository();
-    test('valid', () async => expect(await auth.signIn('teacher@school.pk', 'longenough'), isNull));
-    test('no @', () async => expect(await auth.signIn('teacher.school.pk', 'longenough'), 'invalidEmail'));
-    test('no domain dot', () async => expect(await auth.signIn('t@school', 'longenough'), 'invalidEmail'));
-    test('empty', () async => expect(await auth.signIn('', ''), 'invalidEmail'));
-    test('7-char password (boundary)', () async => expect(await auth.signIn('t@s.pk', '1234567'), 'passwordTooShort'));
-    test('8-char password (boundary)', () async => expect(await auth.signIn('t@s.pk', '12345678'), isNull));
-    test('surrounding spaces in email are ignored', () async => expect(await auth.signIn('  t@s.pk ', '12345678'), isNull));
+    test(
+      'valid',
+      () async =>
+          expect(await auth.signIn('teacher@school.pk', 'longenough'), isNull),
+    );
+    test(
+      'no @',
+      () async => expect(
+        await auth.signIn('teacher.school.pk', 'longenough'),
+        'invalidEmail',
+      ),
+    );
+    test(
+      'no domain dot',
+      () async =>
+          expect(await auth.signIn('t@school', 'longenough'), 'invalidEmail'),
+    );
+    test(
+      'empty',
+      () async => expect(await auth.signIn('', ''), 'invalidEmail'),
+    );
+    test(
+      '7-char password (boundary)',
+      () async =>
+          expect(await auth.signIn('t@s.pk', '1234567'), 'passwordTooShort'),
+    );
+    test(
+      '8-char password (boundary)',
+      () async => expect(await auth.signIn('t@s.pk', '12345678'), isNull),
+    );
+    test(
+      'surrounding spaces in email are ignored',
+      () async => expect(await auth.signIn('  t@s.pk ', '12345678'), isNull),
+    );
   });
 
   test('F2-TC-09 first sign-in: signedOut -> createPin -> unlocked', () async {

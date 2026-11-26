@@ -33,7 +33,9 @@ class _SignInScreenState extends State<SignInScreen> {
       _busy = true;
       _errorKey = null;
     });
-    final error = await SessionScope.read(context).signIn(_email.text, _password.text);
+    final error = await SessionScope.read(
+      context,
+    ).signIn(_email.text, _password.text);
     if (!mounted) return;
     setState(() {
       _busy = false;
@@ -46,13 +48,13 @@ class _SignInScreenState extends State<SignInScreen> {
     final s = AppStrings.of(context);
     final theme = Theme.of(context);
     InputDecoration field(String label) => InputDecoration(
-          labelText: label,
-          filled: true,
-          fillColor: IlmColors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(IlmRadius.md),
-          ),
-        );
+      labelText: label,
+      filled: true,
+      fillColor: IlmColors.white,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(IlmRadius.md),
+      ),
+    );
 
     return Scaffold(
       body: SafeArea(
@@ -60,7 +62,12 @@ class _SignInScreenState extends State<SignInScreen> {
           children: [
             Container(
               color: IlmColors.aubergine,
-              padding: const EdgeInsets.fromLTRB(IlmSpace.xl, IlmSpace.xl, IlmSpace.md, IlmSpace.lg),
+              padding: const EdgeInsets.fromLTRB(
+                IlmSpace.xl,
+                IlmSpace.xl,
+                IlmSpace.md,
+                IlmSpace.lg,
+              ),
               child: Row(
                 children: [
                   Expanded(
@@ -69,11 +76,15 @@ class _SignInScreenState extends State<SignInScreen> {
                       children: [
                         Text(
                           s.appName,
-                          style: theme.textTheme.displaySmall!.copyWith(color: IlmColors.marigold),
+                          style: theme.textTheme.displaySmall!.copyWith(
+                            color: IlmColors.marigold,
+                          ),
                         ),
                         Text(
                           s.appTagline,
-                          style: theme.textTheme.bodyMedium!.copyWith(color: IlmColors.white),
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            color: IlmColors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -114,7 +125,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: Text(
                         s.text(_errorKey!),
                         key: const Key('sign-in-error'),
-                        style: theme.textTheme.bodyMedium!.copyWith(color: IlmColors.rose),
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: IlmColors.rose,
+                        ),
                       ),
                     ),
                   ],
@@ -127,7 +140,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   const SizedBox(height: IlmSpace.lg),
                   Text(
                     s.signInHint,
-                    style: theme.textTheme.bodySmall!.copyWith(color: IlmColors.inkMuted),
+                    style: theme.textTheme.bodySmall!.copyWith(
+                      color: IlmColors.inkMuted,
+                    ),
                   ),
                 ],
               ),
