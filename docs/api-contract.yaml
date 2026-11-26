@@ -94,6 +94,10 @@ components:
         signal: { $ref: "#/components/schemas/Signal" }
         has_consent: { type: boolean }
         is_next_up: { type: boolean, default: false }
+        has_pending_session:
+          type: boolean
+          default: false
+          description: A session was recorded and is waiting to sync or be scored
     ClassRoom:
       type: object
       required: [id, name, name_ur, children]

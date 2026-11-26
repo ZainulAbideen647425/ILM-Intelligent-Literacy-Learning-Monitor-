@@ -43,6 +43,7 @@ class Child {
     required this.signal,
     required this.hasConsent,
     this.isNextUp = false,
+    this.hasPendingSession = false,
   });
 
   factory Child.fromJson(Map<String, Object?> json) => Child(
@@ -58,6 +59,30 @@ class Child {
   final Signal signal;
   final bool hasConsent;
   final bool isNextUp;
+
+  /// A session was recorded and is waiting to sync or be scored.
+  final bool hasPendingSession;
+
+  /// First name, used in prompts such as "Start with Noor".
+  String get firstName => displayName.trim().split(RegExp(r'\s+')).first;
+
+  /// Can be screened now: has consent and has not been screened yet.
+  bool get canStart =>
+      hasConsent && signal == Signal.notYet && !hasPendingSession;
+
+  Child copyWith({
+    Signal? signal,
+    bool? hasConsent,
+    bool? isNextUp,
+    bool? hasPendingSession,
+  }) => Child(
+    id: id,
+    displayName: displayName,
+    signal: signal ?? this.signal,
+    hasConsent: hasConsent ?? this.hasConsent,
+    isNextUp: isNextUp ?? this.isNextUp,
+    hasPendingSession: hasPendingSession ?? this.hasPendingSession,
+  );
 
   /// Up to two initials from the display name, e.g. "Areeba Khan" -> "AK".
   String get initials {
@@ -106,6 +131,27 @@ class ClassRoom {
 
   int countOf(Signal signal) =>
       children.where((c) => c.signal == signal).length;
+
+  /// The child to screen next: the one marked next-up, else the first child
+  /// who can start. Null when everyone with consent has been screened.
+  Child? get nextChild {
+    for (final c in children) {
+      if (c.isNextUp && c.canStart) return c;
+    }
+    for (final c in children) {
+      if (c.canStart) return c;
+    }
+    return null;
+  }
+
+  ClassRoom copyWith({List<Child>? children, int? savedOfflineCount}) =>
+      ClassRoom(
+        id: id,
+        name: name,
+        nameUr: nameUr,
+        children: children ?? this.children,
+        savedOfflineCount: savedOfflineCount ?? this.savedOfflineCount,
+      );
 }
 
 extension on String {

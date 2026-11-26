@@ -28,6 +28,14 @@ class ChildTile extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           )
+        : student.hasPendingSession
+        ? Text(
+            s.awaitingResult,
+            style: theme.textTheme.bodySmall!.copyWith(
+              color: IlmColors.inkMuted,
+              fontWeight: FontWeight.w700,
+            ),
+          )
         : student.isNextUp
         ? Text(
             s.nextUp,
@@ -40,6 +48,8 @@ class ChildTile extends StatelessWidget {
 
     final statusLabel = !student.hasConsent
         ? s.needsConsent
+        : student.hasPendingSession
+        ? s.awaitingResult
         : student.isNextUp
         ? s.nextUp
         : student.signal.label(s);
@@ -159,4 +169,37 @@ class _DashedBorderPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_DashedBorderPainter oldDelegate) => false;
+}
+
+/// Lays tiles out two per row. Each row is as tall as its tallest tile, so
+/// long names or Urdu text grow the row instead of overflowing a fixed grid.
+class TileRows extends StatelessWidget {
+  const TileRows({super.key, required this.tiles, this.columns = 2});
+
+  final List<Widget> tiles;
+  final int columns;
+
+  @override
+  Widget build(BuildContext context) {
+    final rows = <Widget>[];
+    for (var start = 0; start < tiles.length; start += columns) {
+      final cells = <Widget>[];
+      for (var i = start; i < start + columns; i++) {
+        if (i > start) cells.add(const SizedBox(width: IlmSpace.md));
+        cells.add(
+          Expanded(child: i < tiles.length ? tiles[i] : const SizedBox()),
+        );
+      }
+      if (start > 0) rows.add(const SizedBox(height: IlmSpace.md));
+      rows.add(
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: cells,
+          ),
+        ),
+      );
+    }
+    return Column(mainAxisSize: MainAxisSize.min, children: rows);
+  }
 }

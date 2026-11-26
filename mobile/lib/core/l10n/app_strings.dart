@@ -61,6 +61,32 @@ class AppStrings {
       'stepOf': 'Step {current} of {total}',
       'screenedProgress': '{done} of {total} screened',
       'componentGallery': 'Component gallery',
+      'signIn': 'Sign in',
+      'signOut': 'Sign out',
+      'email': 'School email',
+      'password': 'Password',
+      'signInHint':
+          'Demo build: any school email and a password of 8 or more characters.',
+      'invalidEmail': 'Enter a valid email address.',
+      'passwordTooShort': 'Password must be at least 8 characters.',
+      'createPin': 'Create a 4-digit PIN',
+      'createPinHelp':
+          'You will use it to unlock the app and leave child mode.',
+      'confirmPin': 'Enter the same PIN again',
+      'enterPin': 'Enter your PIN',
+      'pinMismatch': 'The PINs did not match. Try again.',
+      'wrongPin': 'Wrong PIN. {left} tries left.',
+      'pinLocked': 'Too many tries. Wait {seconds} seconds.',
+      'deleteDigit': 'Delete',
+      'pinDigitsEntered': '{count} of 4 digits entered',
+      'handTo': 'Hand the phone to {name}',
+      'teacherExit': 'Teacher exit',
+      'exitChildMode': 'Enter your PIN to leave the exercise',
+      'cancel': 'Cancel',
+      'noChildrenInFilter': 'No children in this list.',
+      'allScreened': 'Everyone with consent has been screened.',
+      'sessionSaved': 'Saved on this phone. It will sync later.',
+      'awaitingResult': 'Waiting for result',
     },
     'ur': {
       'appName': 'علم',
@@ -94,6 +120,31 @@ class AppStrings {
       'stepOf': 'مرحلہ {current} از {total}',
       'screenedProgress': '{total} میں سے {done} کی جانچ مکمل',
       'componentGallery': 'اجزاء کی نمائش',
+      'signIn': 'سائن ان',
+      'signOut': 'سائن آؤٹ',
+      'email': 'اسکول ای میل',
+      'password': 'پاس ورڈ',
+      'signInHint':
+          'ڈیمو ورژن: کوئی بھی اسکول ای میل اور کم از کم 8 حروف کا پاس ورڈ۔',
+      'invalidEmail': 'درست ای میل لکھیں۔',
+      'passwordTooShort': 'پاس ورڈ کم از کم 8 حروف کا ہو۔',
+      'createPin': 'چار ہندسوں کا پن بنائیں',
+      'createPinHelp': 'اس سے ایپ کھلے گی اور بچے کی مشق سے واپسی ہوگی۔',
+      'confirmPin': 'وہی پن دوبارہ لکھیں',
+      'enterPin': 'اپنا پن لکھیں',
+      'pinMismatch': 'پن ایک جیسے نہیں۔ دوبارہ کوشش کریں۔',
+      'wrongPin': 'غلط پن۔ {left} کوششیں باقی ہیں۔',
+      'pinLocked': 'بہت زیادہ کوششیں۔ {seconds} سیکنڈ انتظار کریں۔',
+      'deleteDigit': 'مٹائیں',
+      'pinDigitsEntered': '4 میں سے {count} ہندسے درج',
+      'handTo': '{name} کو فون دیں',
+      'teacherExit': 'استاد کی واپسی',
+      'exitChildMode': 'مشق سے نکلنے کے لیے اپنا پن لکھیں',
+      'cancel': 'منسوخ',
+      'noChildrenInFilter': 'اس فہرست میں کوئی بچہ نہیں۔',
+      'allScreened': 'اجازت والے سب بچوں کی جانچ ہو چکی ہے۔',
+      'sessionSaved': 'اس فون پر محفوظ ہو گیا۔ بعد میں سنک ہوگا۔',
+      'awaitingResult': 'نتیجے کا انتظار',
     },
   };
 
@@ -136,6 +187,31 @@ class AppStrings {
   String get rescreenLater => text('rescreenLater');
   String get addNote => text('addNote');
   String get componentGallery => text('componentGallery');
+
+  String get signIn => text('signIn');
+  String get signOut => text('signOut');
+  String get email => text('email');
+  String get password => text('password');
+  String get signInHint => text('signInHint');
+  String get createPin => text('createPin');
+  String get createPinHelp => text('createPinHelp');
+  String get confirmPin => text('confirmPin');
+  String get enterPin => text('enterPin');
+  String get pinMismatch => text('pinMismatch');
+  String get deleteDigit => text('deleteDigit');
+  String get teacherExit => text('teacherExit');
+  String get exitChildMode => text('exitChildMode');
+  String get cancel => text('cancel');
+  String get noChildrenInFilter => text('noChildrenInFilter');
+  String get allScreened => text('allScreened');
+  String get sessionSaved => text('sessionSaved');
+  String get awaitingResult => text('awaitingResult');
+
+  String wrongPin(int left) => text('wrongPin', {'left': left});
+  String pinLocked(int seconds) => text('pinLocked', {'seconds': seconds});
+  String pinDigitsEntered(int count) =>
+      text('pinDigitsEntered', {'count': count});
+  String handTo(String name) => text('handTo', {'name': name});
 
   String stepOf(int current, int total) =>
       text('stepOf', {'current': current, 'total': total});
