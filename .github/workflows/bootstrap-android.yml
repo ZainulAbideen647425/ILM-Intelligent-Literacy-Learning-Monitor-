@@ -27,7 +27,8 @@ jobs:
       - name: Harden and configure Android project
         shell: bash
         run: |
-          gradle=$(ls android/app/build.gradle.kts android/app/build.gradle 2>/dev/null | head -1)
+          gradle=android/app/build.gradle.kts
+          [ -f "$gradle" ] || gradle=android/app/build.gradle
           echo "gradle file: $gradle"
           # flutter_secure_storage needs API 23+.
           sed -i -E 's/minSdk(Version)? *=? *flutter\.minSdkVersion/minSdk = maxOf(23, flutter.minSdkVersion)/' "$gradle"
