@@ -41,7 +41,7 @@ class MockScreeningRepository implements ScreeningRepository {
 /// is cached across tests and can hang inside the test clock) and demos.
 class InMemoryScreeningRepository implements ScreeningRepository {
   InMemoryScreeningRepository(List<ClassRoom> classes)
-      : _classes = {for (final c in classes) c.id: c};
+    : _classes = {for (final c in classes) c.id: c};
 
   final Map<String, ClassRoom> _classes;
 

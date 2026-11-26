@@ -186,12 +186,17 @@ class TileRows extends StatelessWidget {
       final cells = <Widget>[];
       for (var i = start; i < start + columns; i++) {
         if (i > start) cells.add(const SizedBox(width: IlmSpace.md));
-        cells.add(Expanded(child: i < tiles.length ? tiles[i] : const SizedBox()));
+        cells.add(
+          Expanded(child: i < tiles.length ? tiles[i] : const SizedBox()),
+        );
       }
       if (start > 0) rows.add(const SizedBox(height: IlmSpace.md));
       rows.add(
         IntrinsicHeight(
-          child: Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: cells),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: cells,
+          ),
         ),
       );
     }
