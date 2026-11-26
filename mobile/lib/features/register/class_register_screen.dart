@@ -117,11 +117,16 @@ class _Header extends StatelessWidget {
                       color: IlmColors.marigold,
                     ),
                   ),
-                  const Spacer(),
-                  Text(
-                    '${room.savedOfflineCount} ${s.savedOffline}',
-                    key: const Key('saved-offline'),
-                    style: white,
+                  const SizedBox(width: IlmSpace.sm),
+                  Expanded(
+                    child: Text(
+                      '${room.savedOfflineCount} ${s.savedOffline}',
+                      key: const Key('saved-offline'),
+                      textAlign: TextAlign.end,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: white,
+                    ),
                   ),
                   LanguageButton(onPressed: onToggleLanguage),
                   IconButton(
