@@ -81,7 +81,7 @@ void main() {
       expect(taps, 1);
       expect(
         tester.getSemantics(find.byType(ChildTile)),
-        containsSemantics(
+        isSemantics(
           label: 'Areeba Khan, Follow up',
           isButton: true,
           isEnabled: true,

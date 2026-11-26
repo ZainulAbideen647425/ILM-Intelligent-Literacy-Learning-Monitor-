@@ -60,7 +60,7 @@ jobs:
           fi
 
       - name: Static analysis
-        run: flutter analyze --no-fatal-infos
+        run: flutter analyze --fatal-infos
 
       - name: Unit and widget tests
         run: flutter test --coverage --reporter expanded
