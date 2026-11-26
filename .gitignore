@@ -1,0 +1,35 @@
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+# Flutter / Dart
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/coverage/
+mobile/.packages
+mobile/pubspec.lock.bak
+
+# Python / Django
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+*.sqlite3
+.pytest_cache/
+htmlcov/
+
+# Node / Playwright
+node_modules/
+playwright-report/
+test-results/
+
+# Data: real participant data never goes in Git
+data/raw/
+data/private/
+*.wav
+!**/fixtures/**/*.wav
