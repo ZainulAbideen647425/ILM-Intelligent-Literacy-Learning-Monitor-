@@ -162,14 +162,8 @@ class _ComponentGalleryScreenState extends State<ComponentGalleryScreen> {
           ),
           section(
             'Child tiles',
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              mainAxisSpacing: IlmSpace.md,
-              crossAxisSpacing: IlmSpace.md,
-              childAspectRatio: 1.1,
-              children: [
+            TileRows(
+              tiles: [
                 for (final c in _samples) ChildTile(student: c, onTap: () {}),
               ],
             ),

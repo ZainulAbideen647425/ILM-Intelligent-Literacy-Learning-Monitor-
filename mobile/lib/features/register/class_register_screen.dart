@@ -230,21 +230,17 @@ class _Body extends StatelessWidget {
               IlmSpace.lg,
               IlmSpace.lg,
             ),
-            sliver: SliverGrid(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 220,
-                mainAxisExtent: 156,
-                mainAxisSpacing: IlmSpace.md,
-                crossAxisSpacing: IlmSpace.md,
+            sliver: SliverToBoxAdapter(
+              child: TileRows(
+                tiles: [
+                  for (final child in children)
+                    ChildTile(
+                      key: ValueKey('tile-${child.id}'),
+                      student: child,
+                      onTap: child.canStart ? () => onStart(child) : null,
+                    ),
+                ],
               ),
-              delegate: SliverChildBuilderDelegate((context, i) {
-                final child = children[i];
-                return ChildTile(
-                  key: ValueKey('tile-${child.id}'),
-                  student: child,
-                  onTap: child.canStart ? () => onStart(child) : null,
-                );
-              }, childCount: children.length),
             ),
           ),
       ],

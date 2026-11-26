@@ -36,3 +36,21 @@ class MockScreeningRepository implements ScreeningRepository {
   static ClassRoom parseClass(String source) =>
       ClassRoom.fromJson(jsonDecode(source) as Map<String, Object?>);
 }
+
+/// Serves a class already held in memory. Used by widget tests (asset loading
+/// is cached across tests and can hang inside the test clock) and demos.
+class InMemoryScreeningRepository implements ScreeningRepository {
+  InMemoryScreeningRepository(List<ClassRoom> classes)
+      : _classes = {for (final c in classes) c.id: c};
+
+  final Map<String, ClassRoom> _classes;
+
+  @override
+  Future<ClassRoom> getClass(String classId) async {
+    final room = _classes[classId];
+    if (room == null) {
+      throw ArgumentError.value(classId, 'classId', 'No such class');
+    }
+    return room;
+  }
+}

@@ -1,5 +1,7 @@
 // F2-TC-14..20: end-to-end teacher journey on a 390 x 844 phone (design size),
 // fully offline with mock data.
+import 'dart:io';
+
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ilm_mobile/app.dart';
@@ -18,7 +20,13 @@ void main() {
     session = AppSession(
       auth: const MockAuthRepository(),
       pins: PinService(InMemoryPinStore()),
-      screening: MockScreeningRepository(),
+      // Same sample data as the app, read once from disk (see
+      // InMemoryScreeningRepository for why assets are not used here).
+      screening: InMemoryScreeningRepository([
+        MockScreeningRepository.parseClass(
+          File('assets/mock/class_3b.json').readAsStringSync(),
+        ),
+      ]),
     );
   });
 
