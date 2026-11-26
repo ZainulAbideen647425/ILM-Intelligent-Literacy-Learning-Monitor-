@@ -1,0 +1,16 @@
+{
+  "id": "class-3b",
+  "name": "Class 3-B",
+  "name_ur": "جماعت سوم ب",
+  "saved_offline_count": 7,
+  "children": [
+    { "id": "c01", "display_name": "Areeba Khan",   "signal": "follow_up", "has_consent": true },
+    { "id": "c02", "display_name": "Faraz Malik",   "signal": "watch",     "has_consent": true },
+    { "id": "c03", "display_name": "Hania Qureshi", "signal": "all_clear", "has_consent": true },
+    { "id": "c04", "display_name": "Imran Siddiq",  "signal": "all_clear", "has_consent": true },
+    { "id": "c05", "display_name": "Noor Fatima",   "signal": "not_yet",   "has_consent": true, "is_next_up": true },
+    { "id": "c06", "display_name": "Saad Rehman",   "signal": "not_yet",   "has_consent": false },
+    { "id": "c07", "display_name": "Mahnoor Ali",   "signal": "follow_up", "has_consent": true },
+    { "id": "c08", "display_name": "Taha Javed",    "signal": "not_yet",   "has_consent": true }
+  ]
+}
