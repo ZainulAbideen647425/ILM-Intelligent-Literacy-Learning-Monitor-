@@ -28,6 +28,24 @@ jobs:
       - run: flutter pub add material_ui cupertino_ui
       - run: flutter pub get
       - run: dart fix --apply --code=migrate_design_widgets
+      - name: Resolve localisation imports (Material delegates now ship in material_ui)
+        shell: bash
+        run: |
+          for f in lib/app.dart test/helpers.dart; do
+            python3 - "$f" <<'PY'
+          import sys
+          p = sys.argv[1]
+          s = open(p, encoding="utf-8").read()
+          old = "import 'package:flutter_localizations/flutter_localizations.dart';"
+          new = ("import 'package:cupertino_ui/cupertino_ui.dart'\n"
+                 "    show GlobalCupertinoLocalizations;\n"
+                 "import 'package:flutter_localizations/flutter_localizations.dart'\n"
+                 "    show GlobalWidgetsLocalizations;")
+          assert old in s, p
+          open(p, "w", encoding="utf-8").write(s.replace(old, new))
+          PY
+          done
+          head -12 lib/app.dart
       - run: dart fix --dry-run || true
       - run: dart format $(find lib test -name '*.dart' ! -name '*.g.dart')
       - run: flutter analyze --no-fatal-infos || true
