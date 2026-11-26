@@ -1,0 +1,50 @@
+# One-off: generate the Android platform folder with the official template
+# (cannot be generated offline in the dev environment). Removed afterwards.
+name: Bootstrap Android platform (one-off)
+
+on:
+  push:
+    branches: [phase/f2-register]
+    paths: [".github/workflows/bootstrap-android.yml"]
+
+permissions:
+  contents: write
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: phase/f2-register
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter create --platforms=android --org pk.edu.usa.ilm --project-name ilm_mobile .
+      - name: Harden and configure Android project
+        shell: bash
+        run: |
+          gradle=$(ls android/app/build.gradle.kts android/app/build.gradle 2>/dev/null | head -1)
+          echo "gradle file: $gradle"
+          # flutter_secure_storage needs API 23+.
+          sed -i -E 's/minSdk(Version)? *=? *flutter\.minSdkVersion/minSdk = maxOf(23, flutter.minSdkVersion)/' "$gradle"
+          grep -n "minSdk" "$gradle"
+          manifest=android/app/src/main/AndroidManifest.xml
+          # App name; disable auto-backup (secure-storage keys cannot be restored; child data must not leave the device).
+          sed -i 's/android:label="ilm_mobile"/android:label="ILM"/' "$manifest"
+          sed -i 's/<application/<application\n        android:allowBackup="false"\n        android:fullBackupContent="false"/' "$manifest"
+          head -20 "$manifest"
+      - run: flutter pub get
+      - run: flutter test
+      - name: Commit generated platform folder
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add android .gitignore .metadata 2>/dev/null || true
+          git add -A android
+          git status --short | head -40
+          git commit -m "build(android): add Android platform folder (flutter create), minSdk 23, backups off"
+          git push
